@@ -5,6 +5,10 @@ export default class Joueur {
     this.listeScore = [];
   }
   getTotal() {
-    return this.listeScore.reduce((somme, valeur) => somme + valeur);
+    return this.listeScore.reduce((somme, valeur) => somme + valeur, 0);
+  }
+
+  ajouterScore(score) {
+    this.listeScore.push(score);
   }
 }

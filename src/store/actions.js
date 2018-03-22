@@ -5,7 +5,7 @@ export default {
   creerNouvellePartie({ commit }, listeJoueurs) {
     const liste = [];
     listeJoueurs.forEach((element, index) => {
-      liste.push(new Joueur(index, element));
+      liste.push(new Joueur(index + 1, element));
     });
     commit(types.INIT_LISTE, liste);
   },

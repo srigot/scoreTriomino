@@ -67,5 +67,40 @@ describe('store', () => {
         });
       });
     });
+
+    describe(types.UNDO_SCORE, () => {
+      const j1 = new Joueur(1, 'Toto');
+      j1.ajouterScore(20);
+      j1.ajouterScore(10);
+      const j2 = new Joueur(2, 'Titi');
+      j2.ajouterScore(5);
+      const state = { listeJoueurs: [], joueurCourant: null };
+
+      beforeEach(() => {
+        state.listeJoueurs = [];
+        state.joueurCourant = j1;
+
+        state.listeJoueurs.push(j1);
+        state.listeJoueurs.push(j2);
+      });
+
+      it('doit decrementer le dernier score', () => {
+        state.joueurCourant = j2;
+        mutations[types.UNDO_SCORE](state);
+        expect(state.listeJoueurs.length).to.equal(2);
+        expect(state.listeJoueurs[0].getTotal()).to.equal(20);
+        expect(state.joueurCourant).to.be.an('Object');
+        expect(state.joueurCourant.id).to.equal(1);
+      });
+
+      it('doit revenir au dernier si premier', () => {
+        state.joueurCourant = j1;
+        mutations[types.UNDO_SCORE](state);
+        expect(state.listeJoueurs.length).to.equal(2);
+        expect(state.listeJoueurs[1].getTotal()).to.equal(0);
+        expect(state.joueurCourant).to.be.an('Object');
+        expect(state.joueurCourant.id).to.equal(2);
+      });
+    });
   });
 });

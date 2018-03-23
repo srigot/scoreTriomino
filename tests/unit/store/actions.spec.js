@@ -49,5 +49,12 @@ describe('store', () => {
         expect(mockCommit).to.have.been.calledWith(types.UPDATE_SCORE, 123);
       });
     });
+
+    describe('retirerScore', () => {
+      it('doit appeller la mutation UNDO_SCORE', () => {
+        actions.retirerScore({ commit: mockCommit });
+        expect(mockCommit).to.have.been.calledWith(types.UNDO_SCORE);
+      });
+    });
   });
 });

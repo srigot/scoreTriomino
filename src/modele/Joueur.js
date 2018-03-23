@@ -14,4 +14,8 @@ export default class Joueur {
       this.listeScore.unshift(numberScore);
     }
   }
+
+  retirerScore() {
+    this.listeScore.shift();
+  }
 }

@@ -12,4 +12,7 @@ export default {
   ajouterScore({ commit }, score) {
     commit(types.UPDATE_SCORE, score);
   },
+  retirerScore({ commit }) {
+    commit(types.UNDO_SCORE);
+  },
 };

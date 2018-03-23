@@ -33,8 +33,9 @@ export default {
     },
     onSubmit() {
       console.log('Submit');
-      this.creerNouvellePartie(this.joueurs);
-      this.$router.push('/');
+      this.creerNouvellePartie(this.joueurs).then(() => {
+        this.$router.push('/');
+      });
     },
   },
 };

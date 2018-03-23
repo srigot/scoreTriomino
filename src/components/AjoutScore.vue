@@ -7,6 +7,9 @@
             <b-form-input v-model="valeur" type="number" size="4"
               placeholder="Score" number @change="validerSaisie"></b-form-input>
           </b-col>
+          <b-col sm="3">
+            <b-button @click="retirerScore" variant="primary">Undo</b-button>
+          </b-col>
         </b-row>
     </b-container>
   </div>
@@ -24,7 +27,7 @@ export default {
   },
   computed: mapGetters(['nomJoueurCourant']),
   methods: {
-    ...mapActions(['ajouterScore']),
+    ...mapActions(['ajouterScore', 'retirerScore']),
     validerSaisie() {
       console.log('validerSaisie');
       this.ajouterScore(this.valeur);

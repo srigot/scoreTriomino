@@ -9,7 +9,7 @@ export default {
     });
     commit(types.INIT_LISTE, liste);
   },
-  ajouterScore({ commit }, id, score) {
-    commit(types.UPDATE_SCORE, { id, score });
+  ajouterScore({ commit }, score) {
+    commit(types.UPDATE_SCORE, score);
   },
 };

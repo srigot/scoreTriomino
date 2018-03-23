@@ -45,8 +45,8 @@ describe('store', () => {
 
     describe('ajouterScore', () => {
       it('doit appeller la mutation UPDATE_SCORE', () => {
-        actions.ajouterScore({ commit: mockCommit }, 123, 456);
-        expect(mockCommit).to.have.been.calledWith(types.UPDATE_SCORE, { id: 123, score: 456 });
+        actions.ajouterScore({ commit: mockCommit }, 123);
+        expect(mockCommit).to.have.been.calledWith(types.UPDATE_SCORE, 123);
       });
     });
   });

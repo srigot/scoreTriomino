@@ -7,49 +7,63 @@ const { expect } = require('chai');
 describe('store', () => {
   describe('mutations', () => {
     describe(types.INIT_LISTE, () => {
+      const j1 = new Joueur(1, 'Tata');
+      const state = { listeJoueurs: j1, joueurCourant: j1 };
       it('doit remplacer la liste par celle en parametre', () => {
-        const state = { listeJoueurs: ['Tata'] };
-        mutations[types.INIT_LISTE](state, ['Toto', 'Titi']);
+        mutations[types.INIT_LISTE](state, [new Joueur(1, 'Toto'), new Joueur(2, 'Titi')]);
         expect(state.listeJoueurs.length).to.equal(2);
-        expect(state.listeJoueurs[0]).to.equal('Toto');
-        expect(state.listeJoueurs[1]).to.equal('Titi');
+        expect(state.listeJoueurs[0].nom).to.equal('Toto');
+        expect(state.listeJoueurs[1].nom).to.equal('Titi');
+      });
+      it('doit configurer le joueurCourant sur le 1er de la liste', () => {
+        expect(state.joueurCourant).to.be.an('Object');
+        expect(state.joueurCourant.id).to.equal(1);
       });
     });
 
     describe(types.UPDATE_SCORE, () => {
-      const state = { listeJoueurs: [] };
+      const j1 = new Joueur(1, 'Toto');
+      j1.ajouterScore(20);
+      const j2 = new Joueur(2, 'Titi');
+      const state = { listeJoueurs: [], joueurCourant: null };
+
       beforeEach(() => {
         state.listeJoueurs = [];
-        const j1 = new Joueur(1, 'Toto');
-        j1.ajouterScore(20);
+        state.joueurCourant = j1;
 
         state.listeJoueurs.push(j1);
-        state.listeJoueurs.push(new Joueur(2, 'Titi'));
+        state.listeJoueurs.push(j2);
       });
 
-      describe('Ajout d\'un score sur un id inexistant', () => {
+      describe('Ajout d\'un score avec joueurCourant est null', () => {
         it('ne doit rien changer', () => {
-          mutations[types.UPDATE_SCORE](state, 3, 123);
+          state.joueurCourant = null;
+          mutations[types.UPDATE_SCORE](state, 123);
           expect(state.listeJoueurs.length).to.equal(2);
           expect(state.listeJoueurs[0].getTotal()).to.equal(20);
           expect(state.listeJoueurs[1].getTotal()).to.equal(0);
+          expect(state.joueurCourant).to.be.a('null');
         });
       });
 
       describe('Ajout du premier score', () => {
         it('doit ajouter un premier score au joueur', () => {
-          mutations[types.UPDATE_SCORE](state, 2, 12);
+          state.joueurCourant = j2;
+          mutations[types.UPDATE_SCORE](state, 12);
           expect(state.listeJoueurs.length).to.equal(2);
-          expect(state.listeJoueurs[0].getTotal()).to.equal(20);
           expect(state.listeJoueurs[1].getTotal()).to.equal(12);
+          expect(state.joueurCourant).to.be.an('Object');
+          expect(state.joueurCourant.id).to.equal(1);
         });
       });
       describe('Ajout du second score', () => {
         it('doit incrementer le joueur du score indique', () => {
-          mutations[types.UPDATE_SCORE](state, 1, 12);
+          state.joueurCourant = j1;
+          mutations[types.UPDATE_SCORE](state, 12);
           expect(state.listeJoueurs.length).to.equal(2);
           expect(state.listeJoueurs[0].getTotal()).to.equal(32);
-          expect(state.listeJoueurs[1].getTotal()).to.equal(0);
+          expect(state.joueurCourant).to.be.an('Object');
+          expect(state.joueurCourant.id).to.equal(2);
         });
       });
     });

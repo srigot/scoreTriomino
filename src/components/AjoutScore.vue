@@ -2,9 +2,9 @@
   <div class="ajoutScore">
     <b-container class="bv-example-row">
         <b-row>
-          <b-col>Joueur : {{ nomJoueurCourant }}</b-col>
-          <b-col>
-            <b-form-input v-model="valeur" type="number"
+          <b-col sm="6"><h4>Joueur : {{ nomJoueurCourant }}</h4></b-col>
+          <b-col sm="3">
+            <b-form-input v-model="valeur" type="number" size="4"
               placeholder="Score" number @change="validerSaisie"></b-form-input>
           </b-col>
         </b-row>

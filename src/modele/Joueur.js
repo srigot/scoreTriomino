@@ -9,6 +9,9 @@ export default class Joueur {
   }
 
   ajouterScore(score) {
-    this.listeScore.push(score);
+    const numberScore = parseInt(score, 10);
+    if (!Number.isNaN(numberScore)) {
+      this.listeScore.unshift(numberScore);
+    }
   }
 }

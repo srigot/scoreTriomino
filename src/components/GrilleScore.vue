@@ -9,7 +9,7 @@
         </thead>
         <thead>
           <th v-for="joueur in listeJoueurs" :key="joueur.id">
-            {{ joueur.getTotal() }}
+            {{ joueur.listeScore.reduce((somme, valeur) => valeur + somme, 0) }}
           </th>
         </thead>
         <tbody>

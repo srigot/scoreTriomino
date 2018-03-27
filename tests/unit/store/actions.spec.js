@@ -1,6 +1,5 @@
 import actions from '@/store/actions';
 import * as types from '@/store/mutation_types';
-import Joueur from '@/modele/Joueur';
 
 const chai = require('chai');
 const sinon = require('sinon');
@@ -28,7 +27,7 @@ describe('store', () => {
       describe('Cas d\'une liste a un seul element', () => {
         it('doit appeler la mutation INIT_LISTE avec un joueur', () => {
           actions.creerNouvellePartie({ commit: mockCommit }, ['Toto']);
-          expect(mockCommit).to.have.been.calledWith(types.INIT_LISTE, [new Joueur(1, 'Toto')]);
+          expect(mockCommit).to.have.been.calledWith(types.INIT_LISTE, [{ id: 1, nom: 'Toto', listeScore: [] }]);
         });
       });
 
@@ -37,7 +36,11 @@ describe('store', () => {
           actions.creerNouvellePartie({ commit: mockCommit }, ['Toto', 'Titi', 'Tata']);
           expect(mockCommit).to.have.been.calledWith(
             types.INIT_LISTE,
-            [new Joueur(1, 'Toto'), new Joueur(2, 'Titi'), new Joueur(3, 'Tata')],
+            [
+              { id: 1, nom: 'Toto', listeScore: [] },
+              { id: 2, nom: 'Titi', listeScore: [] },
+              { id: 3, nom: 'Tata', listeScore: [] },
+            ],
           );
         });
       });

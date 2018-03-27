@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import Vuex from 'vuex';
 import { shallow, createLocalVue } from '@vue/test-utils';
 import GrilleScore from '@/components/GrilleScore.vue';
-import Joueur from '@/modele/Joueur';
 
 const localVue = createLocalVue();
 
@@ -14,7 +13,7 @@ describe('GrilleScore.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       state: {
-        listeJoueurs: [new Joueur(1, 'Toto'), new Joueur(2, ('Titi'))],
+        listeJoueurs: [{ id: 1, nom: 'Toto', listeScore: [] }, { id: 2, nom: 'Titi', listeScore: [] }],
       },
     });
   });

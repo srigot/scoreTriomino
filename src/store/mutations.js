@@ -7,26 +7,33 @@ export default {
   [types.INIT_LISTE](state, liste) {
     state.listeJoueurs = liste;
     if (liste.length > 0) {
-      [state.joueurCourant] = liste;
+      state.indexJoueurCourant = 0;
     } else {
-      state.joueurCourant = null;
+      state.indexJoueurCourant = null;
     }
   },
   [types.UPDATE_SCORE](state, score) {
-    if (state.joueurCourant !== null) {
-      state.joueurCourant.ajouterScore(score);
-      const idSuivant = state.joueurCourant.id % state.listeJoueurs.length;
-      state.joueurCourant = state.listeJoueurs[idSuivant];
+    if (state.indexJoueurCourant !== null) {
+      const numberScore = parseInt(score, 10);
+      const joueurCourant = state.listeJoueurs[state.indexJoueurCourant];
+      if (joueurCourant !== undefined && !Number.isNaN(numberScore)) {
+        joueurCourant.listeScore.unshift(numberScore);
+      }
+      const idSuivant = (state.indexJoueurCourant + 1) % state.listeJoueurs.length;
+      state.indexJoueurCourant = idSuivant;
     }
   },
   [types.UNDO_SCORE](state) {
-    if (state.joueurCourant !== null) {
-      let idSuivant = state.joueurCourant.id - 2;
-      if (idSuivant < 0) {
-        idSuivant = state.listeJoueurs.length - 1;
+    if (state.indexJoueurCourant !== null) {
+      let idPrecedent = state.indexJoueurCourant - 1;
+      if (idPrecedent < 0) {
+        idPrecedent = state.listeJoueurs.length - 1;
       }
-      state.joueurCourant = state.listeJoueurs[idSuivant];
-      state.joueurCourant.retirerScore();
+      state.indexJoueurCourant = idPrecedent;
+      const joueurCourant = state.listeJoueurs[state.indexJoueurCourant];
+      if (joueurCourant !== undefined) {
+        joueurCourant.listeScore.shift();
+      }
     }
   },
 };

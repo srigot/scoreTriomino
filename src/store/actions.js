@@ -1,4 +1,3 @@
-import Joueur from '@/modele/Joueur';
 import * as types from './mutation_types';
 
 export default {
@@ -6,7 +5,7 @@ export default {
     return new Promise((resolve) => {
       const liste = [];
       listeJoueurs.forEach((element, index) => {
-        liste.push(new Joueur(index + 1, element));
+        liste.push({ id: index + 1, nom: element, listeScore: [] });
       });
       commit(types.INIT_LISTE, liste);
       resolve();

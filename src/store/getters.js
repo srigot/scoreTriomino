@@ -1,7 +1,7 @@
 export default {
   nomJoueurCourant: (state) => {
-    if (state.joueurCourant != null) {
-      return state.joueurCourant.nom;
+    if (state.indexJoueurCourant != null) {
+      return state.listeJoueurs[state.indexJoueurCourant].nom;
     }
     return '';
   },

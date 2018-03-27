@@ -4,11 +4,11 @@
         <b-row>
           <b-col sm="6"><h4>Joueur : {{ nomJoueurCourant }}</h4></b-col>
           <b-col sm="3">
-            <b-form-input v-model="valeur" type="number" size="4"
+            <b-form-input ref="score" v-model="valeur" type="number" size="4"
               placeholder="Score" number @change="validerSaisie"></b-form-input>
           </b-col>
           <b-col sm="3">
-            <b-button @click="retirerScore" variant="primary">Undo</b-button>
+            <b-button @click="clickUndo" variant="primary">Undo</b-button>
           </b-col>
         </b-row>
     </b-container>
@@ -25,13 +25,19 @@ export default {
       valeur: null,
     };
   },
+  mounted() {
+    this.$refs.score.focus();
+  },
   computed: mapGetters(['nomJoueurCourant']),
   methods: {
     ...mapActions(['ajouterScore', 'retirerScore']),
     validerSaisie() {
-      console.log('validerSaisie');
       this.ajouterScore(this.valeur);
       this.valeur = null;
+    },
+    clickUndo() {
+      this.retirerScore();
+      this.$refs.score.focus();
     },
   },
 };

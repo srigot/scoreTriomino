@@ -9,6 +9,7 @@ Vue.use(Vuex);
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
+  strictMode: true,
 });
 
 export default new Vuex.Store({
@@ -16,8 +17,12 @@ export default new Vuex.Store({
     listeJoueurs: [],
     indexJoueurCourant: null,
   },
-  mutations,
+  mutations: {
+    ...mutations,
+    RESTORE_MUTATION: vuexLocal.RESTORE_MUTATION,
+  },
   actions,
   getters,
   plugins: [vuexLocal.plugin],
+//  strict: true,
 });

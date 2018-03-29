@@ -16,31 +16,31 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AjoutScore',
-  data() {
+  data () {
     return {
-      valeur: null,
-    };
+      valeur: null
+    }
   },
-  mounted() {
-    this.$refs.score.focus();
+  mounted () {
+    this.$refs.score.focus()
   },
   computed: mapGetters(['nomJoueurCourant']),
   methods: {
     ...mapActions(['ajouterScore', 'retirerScore']),
-    validerSaisie() {
-      this.ajouterScore(this.valeur);
-      this.valeur = null;
+    validerSaisie () {
+      this.ajouterScore(this.valeur)
+      this.valeur = null
     },
-    clickUndo() {
-      this.retirerScore();
-      this.$refs.score.focus();
-    },
-  },
-};
+    clickUndo () {
+      this.retirerScore()
+      this.$refs.score.focus()
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

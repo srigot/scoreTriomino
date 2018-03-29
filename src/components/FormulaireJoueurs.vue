@@ -14,31 +14,31 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 
 export default {
   name: 'FormulaireJoueurs',
-  data() {
+  data () {
     return {
-      joueurs: [],
-    };
+      joueurs: []
+    }
   },
   methods: {
     ...mapActions(['creerNouvellePartie']),
-    ajouterJoueur() {
-      this.joueurs.push(`Joueur ${this.joueurs.length + 1}`);
+    ajouterJoueur () {
+      this.joueurs.push(`Joueur ${this.joueurs.length + 1}`)
     },
-    supprimerJoueur() {
-      this.joueurs.pop();
+    supprimerJoueur () {
+      this.joueurs.pop()
     },
-    onSubmit() {
-      console.log('Submit');
+    onSubmit () {
+      console.log('Submit')
       this.creerNouvellePartie(this.joueurs).then(() => {
-        this.$router.push('/');
-      });
-    },
-  },
-};
+        this.$router.push('/')
+      })
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

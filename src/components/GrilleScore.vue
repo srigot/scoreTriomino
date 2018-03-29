@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 export default {
   name: 'GrilleScore',
-  computed: mapState(['listeJoueurs']),
-};
+  computed: mapState(['listeJoueurs'])
+}
 </script>
 
 <style scoped lang="scss">

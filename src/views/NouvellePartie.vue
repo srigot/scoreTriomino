@@ -6,12 +6,12 @@
 
 <script>
 // @ is an alias to /src
-import FormulaireJoueurs from '@/components/FormulaireJoueurs.vue';
+import FormulaireJoueurs from '@/components/FormulaireJoueurs.vue'
 
 export default {
   name: 'home',
   components: {
-    FormulaireJoueurs,
-  },
-};
+    FormulaireJoueurs
+  }
+}
 </script>

@@ -1,14 +1,20 @@
 <template>
   <div class="formulaireJoueurs container">
-    <b-button @click="ajouterJoueur" variant="primary">Ajouter un joueur</b-button>
-    <b-button @click="supprimerJoueur" variant="primary">Supprimer un joueur</b-button>
+    <b-row class="justify-content-center">
+      <b-button @click="ajouterJoueur" variant="secondary">+</b-button>
+      <b-button @click="supprimerJoueur" variant="secondary">-</b-button>
+    </b-row>
     <b-form @submit="onSubmit">
-      <b-form-input v-for="(joueur, index) in joueurs" :key="index"
-        v-model="joueurs[index]"
-        required
-        placeholder="Nom du joueur">
-      </b-form-input>
-      <b-button type="submit" variant="primary">Valider</b-button>
+      <b-row class="justify-content-center" v-for="(joueur, index) in joueurs" :key="index">
+        <b-form-input
+          v-model="joueurs[index]"
+          required
+          :placeholder="listePlaceHolder[index]">
+        </b-form-input>
+      </b-row>
+      <b-row class="justify-content-center">
+        <b-button type="submit" variant="primary">Valider</b-button>
+      </b-row>
     </b-form>
   </div>
 </template>
@@ -20,16 +26,19 @@ export default {
   name: 'FormulaireJoueurs',
   data () {
     return {
-      joueurs: []
+      joueurs: [],
+      listePlaceHolder: []
     }
   },
   methods: {
     ...mapActions(['creerNouvellePartie']),
     ajouterJoueur () {
-      this.joueurs.push(`Joueur ${this.joueurs.length + 1}`)
+      this.listePlaceHolder.push(`Joueur ${this.listePlaceHolder.length + 1}`)
+      this.joueurs.push('')
     },
     supprimerJoueur () {
       this.joueurs.pop()
+      this.listePlaceHolder.pop()
     },
     onSubmit () {
       console.log('Submit')
@@ -42,4 +51,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+button {
+  margin-left: 2px
+}
+.row {
+  margin-bottom: 2px
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="ajoutScore">
+  <div v-if="nomJoueurCourant !== ''" class="ajoutScore">
     <b-container>
         <b-row>
           <b-col sm="3"><h4>Joueur : {{ nomJoueurCourant }}</h4></b-col>
@@ -15,6 +15,9 @@
           </b-col>
         </b-row>
     </b-container>
+  </div>
+  <div v-else>
+    <b-alert show variant="warning">Créer une nouvelle partie : <b-link to="/new">lien</b-link></b-alert>
   </div>
 </template>
 

@@ -41,13 +41,30 @@ describe('AjoutScore.vue', () => {
   it('doit appeler la mutation sur saisie d\'une valeur', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })
     const input = wrapper.find('input')
-    input.element.value = 123
-    input.trigger('input')
-    expect(actions.ajouterScore).to.have.been.calledWith('123')
-    // FIXME A corriger
+    wrapper.vm.valeur = 123
+    input.trigger('change')
+    expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, 123)
   })
   it('doit retirer 5 si on clique sur le bouton PIOCHE', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })
-    const btnPioche = wrapper.find('pioche')
+    const btnPioche = wrapper.find('#pioche')
+    btnPioche.trigger('click')
+    expect(wrapper.vm.pioche).to.equal(1)
+    wrapper.vm.valeur = 2
+    wrapper.find('input').trigger('change')
+    expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, -3)
+  })
+  it('doit retirer 25 si on clique 4 fois sur le bouton PIOCHE', () => {
+    const wrapper = shallow(AjoutScore, { store, localVue })
+    const btnPioche = wrapper.find('#pioche')
+    btnPioche.trigger('click')
+    expect(wrapper.vm.pioche).to.equal(1)
+    btnPioche.trigger('click')
+    expect(wrapper.vm.pioche).to.equal(2)
+    btnPioche.trigger('click')
+    expect(wrapper.vm.pioche).to.equal(3)
+    btnPioche.trigger('click')
+    expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, -25)
+    expect(wrapper.vm.pioche).to.equal(0)
   })
 })

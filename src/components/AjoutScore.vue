@@ -4,14 +4,14 @@
         <b-row>
           <b-col sm="3"><h4>Joueur : {{ nomJoueurCourant }}</h4></b-col>
           <b-col sm="2">
-            <b-button @click="clickPioche" variant="primary">{{ pioche > 2 ? 'Non joué' : 'Pioche' }} <b-badge variant="light">{{ pioche }}</b-badge></b-button>
+            <b-button id="pioche" @click="clickPioche" variant="primary">{{ pioche > 2 ? 'Non joué' : 'Pioche' }} <b-badge variant="light">{{ pioche }}</b-badge></b-button>
           </b-col>
           <b-col sm="auto">
             <b-form-input ref="score" v-model.number="valeur" type="number" size="4"
               placeholder="Score" number @change="validerSaisie"></b-form-input>
           </b-col>
           <b-col sm="1">
-            <b-button @click="clickUndo" variant="primary">Undo</b-button>
+            <b-button id="undo" @click="clickUndo" variant="primary">Undo</b-button>
           </b-col>
         </b-row>
     </b-container>
@@ -44,11 +44,13 @@ export default {
     },
     validerSaisie () {
       let score = this.pioche * (-5)
+      console.log('score 1 : ', score)
       if (this.valeur == null) {
         score += -10
       } else {
         score += this.valeur
       }
+      console.log('score 2 : ', score)
       this.ajouterScore(score)
       this.resetCompteurs()
     },

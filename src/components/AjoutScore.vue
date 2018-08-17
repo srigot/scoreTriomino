@@ -8,7 +8,7 @@
           </b-col>
           <b-col sm="auto">
             <b-form-input ref="score" v-model.number="valeur" type="number" size="4"
-              placeholder="Score" number @change="validerSaisie"></b-form-input>
+              placeholder="Score" number @keyup.enter.native="validerSaisie"></b-form-input>
           </b-col>
           <b-col sm="1">
             <b-button id="undo" @click="clickUndo" variant="primary">Undo</b-button>

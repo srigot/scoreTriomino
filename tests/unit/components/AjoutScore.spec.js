@@ -42,7 +42,7 @@ describe('AjoutScore.vue', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })
     const input = wrapper.find('input')
     wrapper.vm.valeur = 123
-    input.trigger('change')
+    input.trigger('keyup.enter')
     expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, 123)
   })
   it('doit retirer 5 si on clique sur le bouton PIOCHE', () => {
@@ -51,7 +51,7 @@ describe('AjoutScore.vue', () => {
     btnPioche.trigger('click')
     expect(wrapper.vm.pioche).to.equal(1)
     wrapper.vm.valeur = 2
-    wrapper.find('input').trigger('change')
+    wrapper.find('input').trigger('keyup.enter')
     expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, -3)
   })
   it('doit retirer 25 si on clique 4 fois sur le bouton PIOCHE', () => {

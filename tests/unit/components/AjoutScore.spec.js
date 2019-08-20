@@ -32,7 +32,7 @@ describe('AjoutScore.vue', () => {
   it('doit afficher le nom du joueur', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })
     const h4 = wrapper.find('h4')
-    expect(h4.text()).to.equal('Joueur : Toto')
+    expect(h4.text()).to.equal('Toto')
   })
   it('doit afficher une case de saisie', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })
@@ -66,5 +66,12 @@ describe('AjoutScore.vue', () => {
     btnPioche.trigger('click')
     expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, -25)
     expect(wrapper.vm.pioche).to.equal(0)
+  })
+  it('doit mettre 0 si aucune saisie', () => {
+    const wrapper = shallow(AjoutScore, { store, localVue })
+    const input = wrapper.find('input')
+    wrapper.vm.valeur = 123
+    input.trigger('keyup.enter')
+    expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, 0)
   })
 })

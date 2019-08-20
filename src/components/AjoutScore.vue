@@ -2,7 +2,7 @@
   <div v-if="nomJoueurCourant !== ''" class="ajoutScore">
     <b-container>
         <b-row>
-          <b-col sm="3"><h4>Joueur : {{ nomJoueurCourant }}</h4></b-col>
+          <b-col sm="3"><h4>{{ nomJoueurCourant }}</h4></b-col>
           <b-col sm="2">
             <b-button id="pioche" @click="clickPioche" variant="primary">{{ pioche > 2 ? 'Non joué' : 'Pioche' }} <b-badge variant="light">{{ pioche }}</b-badge></b-button>
           </b-col>
@@ -44,8 +44,8 @@ export default {
     },
     validerSaisie () {
       let score = this.pioche * (-5)
-      console.log('score 1 : ', score)
-      if (this.valeur == null) {
+      // Cas du click sur 'Non joué'
+      if (this.valeur == null && this.pioche == 3) {
         score += -10
       } else {
         score += this.valeur

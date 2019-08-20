@@ -44,13 +44,8 @@ export default {
     },
     validerSaisie () {
       let score = this.pioche * (-5)
-      // Cas du click sur 'Non joué'
-      if (this.valeur == null && this.pioche == 3) {
-        score += -10
-      } else {
-        score += this.valeur
-      }
-      console.log('score 2 : ', score)
+      score += this.valeur
+
       this.ajouterScore(score)
       this.resetCompteurs()
     },
@@ -63,6 +58,8 @@ export default {
       if (this.pioche < 3) {
         this.pioche++
       } else {
+        // Click sur non joue
+        this.valeur = -10
         this.validerSaisie()
       }
       this.$refs.score.focus()

@@ -70,7 +70,6 @@ describe('AjoutScore.vue', () => {
   it('doit mettre 0 si aucune saisie', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })
     const input = wrapper.find('input')
-    wrapper.vm.valeur = 123
     input.trigger('keyup.enter')
     expect(actions.ajouterScore).to.have.been.calledWith(sinon.match.any, 0)
   })

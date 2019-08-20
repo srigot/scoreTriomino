@@ -32,7 +32,7 @@ describe('AjoutScore.vue', () => {
   it('doit afficher le nom du joueur', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })
     const h4 = wrapper.find('h4')
-    expect(h4.text()).to.equal('Toto')
+    expect(h4.text()).to.equal('Joueur : Toto')
   })
   it('doit afficher une case de saisie', () => {
     const wrapper = shallow(AjoutScore, { store, localVue })

@@ -41,7 +41,6 @@ export default {
       this.listePlaceHolder.pop()
     },
     onSubmit () {
-      console.log('Submit')
       this.creerNouvellePartie(this.joueurs).then(() => {
         this.$router.push('/')
       })

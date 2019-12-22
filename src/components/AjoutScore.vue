@@ -3,7 +3,7 @@
     <b-container>
         <b-row>
           <b-col sm="3"><h4>{{ nomJoueurCourant }}</h4></b-col>
-          <b-col sm="2">
+          <b-col sm="3">
             <b-button id="pioche" @click="clickPioche" variant="primary">{{ pioche > 2 ? 'Non joué' : 'Pioche' }} <b-badge variant="light">{{ pioche }}</b-badge></b-button>
           </b-col>
           <b-col sm="auto">

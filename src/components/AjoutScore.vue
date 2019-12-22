@@ -2,11 +2,11 @@
   <div v-if="nomJoueurCourant !== ''" class="ajoutScore">
     <b-container>
         <b-row>
-          <b-col sm="3"><h4>{{ nomJoueurCourant }}</h4></b-col>
+          <b-col sm="5"><h4>{{ nomJoueurCourant }}</h4></b-col>
           <b-col sm="3">
             <b-button id="pioche" @click="clickPioche" variant="primary">{{ pioche > 2 ? 'Non joué' : 'Pioche' }} <b-badge variant="light">{{ pioche }}</b-badge></b-button>
           </b-col>
-          <b-col sm="auto">
+          <b-col sm="3">
             <b-form-input ref="score" v-model.number="valeur" type="number" size="4"
               placeholder="Score" number @keyup.enter.native="validerSaisie"></b-form-input>
           </b-col>

@@ -2,7 +2,7 @@
   <div v-if="nomJoueurCourant !== ''" class="ajoutScore">
     <b-container>
         <b-row>
-          <b-col sm="5"><h4>{{ nomJoueurCourant }}</h4></b-col>
+          <b-col sm="4"><h4>{{ nomJoueurCourant }}</h4></b-col>
           <b-col sm="3">
             <b-button id="pioche" @click="clickPioche" variant="primary">{{ pioche > 2 ? 'Non joué' : 'Pioche' }} <b-badge variant="light">{{ pioche }}</b-badge></b-button>
           </b-col>
@@ -10,7 +10,7 @@
             <b-form-input ref="score" v-model.number="valeur" type="number" size="4"
               placeholder="Score" number @keyup.enter.native="validerSaisie"></b-form-input>
           </b-col>
-          <b-col sm="1">
+          <b-col sm="2">
             <b-button id="undo" @click="clickUndo" variant="primary">Undo</b-button>
           </b-col>
         </b-row>
